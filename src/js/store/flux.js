@@ -12,7 +12,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			cohorte: "Console Log this. It's located in the Flux.js, inside the object store - cohorte",
+			allContactsAgenda : []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -37,6 +39,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+
+			getAllContactsAgenda: async () =>{
+				const url = "https://playground.4geeks.com/apis/fake/contact/agenda/PauFargasAgenda";
+				const options = {
+					method: 'GET'
+				};
+				const response = await fetch (url, options);
+
+				if (response.ok){
+					const data = await response.json()
+					setStore({"allContactsAgenda" : data})
+					console.log(data)
+							//Hacemos algo
+							
+				} else {
+							// Tratamiento del error
+							console.log("Error: ", response.text, response.statusText)
+				}
+
+
 			}
 		}
 	};
