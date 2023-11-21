@@ -1,14 +1,25 @@
 import React, {useContext} from "react";
 import {Context}  from "../store/appContext.js";
+import { Link } from "react-router-dom";
 
 export const Contacts = () => {
 
   const {store,actions} = useContext(Context)
   console.log(store.cohorte)
+
+  const handleDelete = (contactID) => {
+    actions.deleteContact(contactID)   
+
+  }
   return (
     <div className="container">
+      <div className="my-4 d-flex justify-content-center">
+    <Link to="/new_contact">
+        <button className="btn btn-success">Add new contact</button>
+    </Link>
+</div>
       <ul>
-        {store.allContactsAgenda.map((item) => <li>
+        {store.allContactsAgenda.map((item) => <li key={item.id}>
           <div className="row">
             <div className="image col-3">
               <img
@@ -34,10 +45,11 @@ export const Contacts = () => {
             </div>
             <div className="col-2 iconosFinales">
               <i className="fas fa-pencil-alt m-3"></i>
-              <i className="fas fa-trash-alt m-3"></i>
+              <i className="fas fa-trash-alt m-3" onClick={()=> handleDelete(item.id)}></i>
             </div>
         </div>
-        </li> )}
+        </li> 
+        )}
         
       </ul>
     </div>

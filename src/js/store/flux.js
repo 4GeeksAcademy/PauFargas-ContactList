@@ -60,6 +60,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 
+			},
+			addContact  : async (newContact) => {
+				const url = "https://playground.4geeks.com/apis/fake/contact/"
+				const slug_agenda = "PauFargasAgenda"
+				const options = {
+					method : 'POST',
+					headers: {"Content-Type" : "application/json"},
+					body: JSON.stringify(newContact),
+				};
+
+				const response = await fetch (url, options);
+
+				if (response.ok){
+					alert("Contacto añadido satisfactoriamente"); 
+					console.log("Contacto añadido satisfactoriamente");
+					getActions().getAllContactsAgenda()
+											
+				} else{
+					console.log("Error: ", response.status, response.statusText)
+				}
+			},
+			deleteContact : async (contactID) =>{
+				const url = `https://playground.4geeks.com/apis/fake/contact/${contactID}`;
+				const slug_agenda = "PauFargasAgenda";
+				const options = {
+					method : 'DELETE',
+					headers: {"Content-Type": "application/json"}
+				};
+				const response = await fetch (url, options);
+				if (response.ok){
+					alert('Contacto eliminado correctamente')
+					console.log("Contacto eliminado correctamente")
+					getActions().getAllContactsAgenda();
+				}else{
+					console.log("Error: ", response.status, response.statusText);
+				}
 			}
 		}
 	};
