@@ -13,11 +13,16 @@ export const Contacts = () => {
   }
   return (
     <div className="container">
-      <div className="my-4 d-flex justify-content-center">
-    <Link to="/new_contact">
-        <button className="btn btn-success">Add new contact</button>
-    </Link>
-</div>
+      
+        <div className="my-4 d-flex justify-content-center">
+      <Link to="/new_contact">
+          <button className="btn btn-success m-4">Add new contact</button>
+      </Link>      
+      <Link to="/">
+          <button className="btn btn-primary m-4">Back to home</button>
+      </Link>
+      </div>
+    
       <ul>
         {store.allContactsAgenda.map((item) => <li key={item.id}>
           <div className="row">
