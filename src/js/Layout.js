@@ -18,7 +18,7 @@ import { Navbar } from "./component/Navbar.jsx";
 import { Footer } from "./component/Footer.jsx";
 import { NewContact } from "./views/NewContact.jsx";
 import { Contacts } from "./views/Contacts.jsx";
-
+import { ContactEdit } from "./views/ContactEdit.jsx";
 //create your first component
 const Layout = () => {
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -37,6 +37,7 @@ const Layout = () => {
 						<Route path="*" element={<h1>Not found!</h1>} />
 						<Route path="/new_contact" element = {<NewContact/>}/>
 						<Route path="/contacts" element = {<Contacts/>}/>
+						<Route path='/contacts/:id' element= {<ContactEdit/>}/>
 					</Routes>
 					<Footer />
 				</ScrollToTop>

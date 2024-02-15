@@ -16,6 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			cohorte: "Console Log this. It's located in the Flux.js, inside the object store - cohorte",
 			allContactsAgenda : [],
 			allAgendas : {},
+			currentUser: {}
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -41,6 +42,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
+			assignUser: (item) => setStore({currentUser : item}),
 
 			getAllContactsAgenda: async () =>{
 				const url = "https://playground.4geeks.com/apis/fake/contact/agenda/PauFargasAgenda";
@@ -111,7 +113,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}else{
 					console.log("Error getting agendas: ", response.status, response.statusText);
 				}
-			}
+			},
+			updateContacts: async (dataToSend, id) => {
+				const options = {
+					method: "PUT",
+					body: JSON.stringify(dataToSend),
+					headers: {
+						"Content-type": "application/json"
+					}
+				}
+
+				const response = await fetch('https://playground.4geeks.com/apis/fake/contact/' + id, options);
+				if (!response.ok) return
+				const data = await response.json();
+				getActions().getAllContactsAgenda();
+			},
 		}
 	};
 };

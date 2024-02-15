@@ -9,8 +9,14 @@ export const Contacts = () => {
 
   const handleDelete = (contactID) => {
     actions.deleteContact(contactID)   
-
   }
+
+  const handleUser = (item) => {
+    actions.assignUser(item)
+  }
+
+
+
   return (
     <div className="container">
       
@@ -49,7 +55,9 @@ export const Contacts = () => {
               </div>
             </div>
             <div className="col-2 iconosFinales">
-              <i className="fas fa-pencil-alt m-3"></i>
+              <Link to={`/contacts/${item.id}`}>
+              <i className="fas fa-pencil-alt m-3" onClick={() => handleUser(item) } style={{color: "#212529"}}></i>
+              </Link>
               <i className="fas fa-trash-alt m-3" onClick={()=> handleDelete(item.id)}></i>
             </div>
         </div>
